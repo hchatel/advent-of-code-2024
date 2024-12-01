@@ -1,6 +1,7 @@
 # Advent of Code
 
-Template to solve Advent of code easily with typescript and TDD (if you wish).
+Template to solve [Advent of code](https://adventofcode.com/2024) easily with
+typescript and TDD (if you wish).
 
 # Init project
 

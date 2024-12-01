@@ -1,8 +1,9 @@
+import { solveWithLogs } from "../utils/logs.ts";
+import { Solver } from "../utils/types.ts";
+
 // --------------
 // Problem Inputs
 // --------------
-
-import { solveWithLogs } from "../utils/logs.ts";
 
 type InputLine = string;
 
@@ -23,7 +24,7 @@ const inputLines: InputLine[] = Deno.readTextFileSync(
 // Solve problem
 // -------------
 
-export const problem1 = () => {
+export const problem1: Solver = () => {
     console.log("Input lines: ", inputLines);
 
     return "This problem ain't gonna solve itself !";
