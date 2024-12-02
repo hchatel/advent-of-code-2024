@@ -84,7 +84,7 @@ const quickAndDirty = (): number =>
     leftList.reduce(
         (sum, leftId) =>
             sum += leftId *
-            rightList.filter((rightId) => rightId === leftId).length,
+                rightList.filter((rightId) => rightId === leftId).length,
         0,
     );
 
