@@ -8,7 +8,7 @@ import { Solver } from "../utils/types.ts";
 type InputLine = string;
 
 // Switch inputs here manually or using --test option in cmd line
-const USE_TEST_INPUT = true ||
+const USE_TEST_INPUT = false ||
     Deno.args.some((arg) => ["-t", "--test"].includes(arg));
 
 // Read file
@@ -42,5 +42,9 @@ const problem1: Solver = () => {
 // ---------------
 
 solveWithLogs(problem1, 1);
+// Tries:
+// -
 
 // solveWithLogs(problem2, 2);
+// Tries:
+// -
