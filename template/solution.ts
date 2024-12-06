@@ -7,8 +7,9 @@ import { Solver } from "../utils/types.ts";
 
 type InputLine = string;
 
-// Switch inputs here
-const USE_TEST_INPUT = true;
+// Switch inputs here manually or using --test option in cmd line
+const USE_TEST_INPUT = true ||
+    Deno.args.some((arg) => ["-t", "--test"].includes(arg));
 
 // Read file
 const inputFilename = USE_TEST_INPUT ? "inputTest.txt" : "input.txt";
@@ -24,13 +25,17 @@ const inputLines: InputLine[] = Deno.readTextFileSync(
 // Solve problem
 // -------------
 
-export const problem1: Solver = () => {
+const problem1: Solver = () => {
     console.log("Input lines: ", inputLines);
 
     return "This problem ain't gonna solve itself !";
 };
 
-// const problem2: Solver = () => myFunction(TEST_INPUT);
+// const problem2: Solver = () => {
+//     console.log("Input lines: ", inputLines);
+
+//     return "This one either...";
+// };
 
 // ---------------
 // Display answers

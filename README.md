@@ -1,6 +1,7 @@
 # Advent of Code
 
-Template to solve [Advent of code](https://adventofcode.com/2024) easily with typescript and TDD (if you wish).
+Template to solve [Advent of code](https://adventofcode.com/2024) easily with
+typescript and TDD (if you wish).
 
 # Init project
 
@@ -28,6 +29,11 @@ $ deno task new Day01
 
 ```bash
 $ deno run --allow-read Day01/solution.ts
+
+# To run with test input:
+
+$ deno run --allow-read Day01/solution.ts --test
+$ deno run --allow-read Day01/solution.ts -t
 ```
 
 # Other commands

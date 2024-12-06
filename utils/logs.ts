@@ -9,15 +9,15 @@ import { Solver } from "./types.ts";
 export const solveWithLogs = (solver: Solver, problemIndex: 1 | 2) => {
     console.log(`\n### Solving problem n°${problemIndex}...\n`);
 
-    const timerLabel = `\n=> Problem ${problemIndex} ran in`;
+    const timerLabel = "  Execution time";
     console.time(timerLabel);
 
     const returnValue = solver();
 
-    console.info(`\nAnswer:`);
-    console.info("-------------------------------------------------");
-    console.info(returnValue);
-    console.info("-------------------------------------------------");
+    console.info(`  Answer:`);
+    console.info("  -------------------------------------------------");
+    console.info(" ", returnValue);
+    console.info("  -------------------------------------------------");
 
     console.timeEnd(timerLabel);
 
