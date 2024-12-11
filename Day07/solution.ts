@@ -59,11 +59,9 @@ const checkLine = (line: string, withConcat: boolean = false): number => {
 // Solve problem
 // -------------
 
-const problem1: Solver = () =>
-    inputLines.reduce((sum, line) => sum + checkLine(line), 0);
+const problem1: Solver = () => inputLines.reduce((sum, line) => sum + checkLine(line), 0);
 
-const problem2: Solver = () =>
-    inputLines.reduce((sum, line) => sum + checkLine(line, true), 0);
+const problem2: Solver = () => inputLines.reduce((sum, line) => sum + checkLine(line, true), 0);
 
 // ---------------
 // Display answers

@@ -31,9 +31,7 @@ const checkLine = (line: string): number => {
 
     for (const [index, page1] of pages.entries()) {
         if (
-            pages.slice(index + 1).some((page2) =>
-                !rulesMap.has(`${page1}|${page2}`)
-            )
+            pages.slice(index + 1).some((page2) => !rulesMap.has(`${page1}|${page2}`))
         ) {
             return 0;
         }
@@ -46,9 +44,7 @@ const checkAndFixLine = (line: string): number => {
     const pages = line.split(",");
 
     if (!checkLine(line)) {
-        pages.sort((page1, page2) =>
-            rulesMap.has(`${page1}|${page2}`) ? 1 : -1
-        );
+        pages.sort((page1, page2) => rulesMap.has(`${page1}|${page2}`) ? 1 : -1);
 
         return +pages[(pages.length - 1) / 2];
     }

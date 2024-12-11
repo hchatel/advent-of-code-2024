@@ -1,13 +1,12 @@
 # Advent of Code
 
-Template to solve [Advent of code](https://adventofcode.com/2024) easily with
-typescript and TDD (if you wish).
+Template to solve [Advent of code](https://adventofcode.com/2024) easily with typescript and TDD (if you wish).
 
 # Init project
 
-[Install Deno](https://docs.deno.com/runtime/)
+1. [Install Deno](https://docs.deno.com/runtime/)
 
-Check you have deno installed
+2. Check you have deno installed
 
 ```bash
 $ deno -v
@@ -29,11 +28,13 @@ $ deno task new Day01
 
 ```bash
 $ deno run --allow-read Day01/solution.ts
+# Or
+$ deno task run Day01
 
 # To run with test input:
 
-$ deno run --allow-read Day01/solution.ts --test
-$ deno run --allow-read Day01/solution.ts -t
+$ deno task run Day01 --test
+$ deno task run Day01 -t
 ```
 
 # Other commands
@@ -42,4 +43,10 @@ $ deno run --allow-read Day01/solution.ts -t
 
 ```bash
 $ deno test --allow-read Day01
+```
+
+## Format the code
+
+```bash
+$ deno fmt
 ```

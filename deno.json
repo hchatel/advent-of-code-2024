@@ -1,6 +1,7 @@
 {
     "tasks": {
-        "new": "cp -r template"
+        "new": "cp -r template",
+        "run": "sh utils/denoTaskRun.sh"
     },
     "fmt": {
         "indentWidth": 4,
