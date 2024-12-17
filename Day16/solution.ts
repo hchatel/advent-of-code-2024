@@ -138,7 +138,7 @@ const problem2: Solver = () => findMinScore(inputLines)[1];
 //   => Of course, the condition should be
 //      even larger to account for turns =>     scoreMap[newI][newJ] === -1 || newScore - scoreMap[newI][newJ] < 1000
 // - 89464 => Too high :(
-//   => Silly me forgot to update add the strict condition to update scoreMap now that the first condition is too "wide"
+//   => Silly me forgot to add the strict condition to update scoreMap now that the first condition is too "wide"
 // - 89460 => Correct !
 
 solveWithLogs(problem2, 2);
