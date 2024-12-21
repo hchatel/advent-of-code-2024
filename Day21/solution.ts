@@ -47,8 +47,11 @@ const DK: Keyboard = {
     ">": [1, 2],
 };
 
+type PatternCount = Record<string, number>;
+
 const sequencesDict = new Map<string, string[][]>();
-const patternScore = new Map<string, number>();
+
+const patternCountMap = new Map<string, PatternCount>();
 
 const getSequences = (btnA: string, btnB: string, keyboard: Keyboard): string[][] => {
     const sequences = sequencesDict.get(`${btnA}${btnB}`);
@@ -106,6 +109,50 @@ const getKeyboardSequences = (code: string[], numeric = false): string[][] => {
     return sequences;
 };
 
+const getPatternCountFromSequence = (sequence: string[]): PatternCount => {
+    let current = [];
+    const patternCount: PatternCount = {};
+
+    for (const button of sequence) {
+        current.push(button);
+        if (button === "A") {
+            const pattern = current.join("");
+            patternCount[pattern] = (patternCount[pattern] ?? 0) + 1;
+            current = [];
+        }
+    }
+
+    return patternCount;
+};
+
+const getNextPatternCount = (pattern: string): PatternCount => {
+    let patternCount = patternCountMap.get(pattern);
+    if (patternCount) return patternCount;
+
+    const sequences = getKeyboardSequences(pattern.split(""));
+
+    const minLength = sequences.reduce((min, sequence) => Math.min(min, sequence.length), sequences[0].length);
+
+    patternCount = getPatternCountFromSequence(sequences.find((sequence) => sequence.length === minLength) ?? []);
+
+    patternCountMap.set(pattern, patternCount);
+
+    return patternCount;
+};
+
+const transformPatternCount = (patternCount: PatternCount): PatternCount => {
+    const newPatternCount: PatternCount = {};
+
+    for (const [pattern, count] of Object.entries(patternCount)) {
+        const nextPatternCount = getNextPatternCount(pattern);
+        for (const [newPattern, newCount] of Object.entries(nextPatternCount)) {
+            newPatternCount[newPattern] = (newPatternCount[newPattern] ?? 0) + count * newCount;
+        }
+    }
+
+    return newPatternCount;
+};
+
 // -------------
 // Solve problem
 // -------------
@@ -150,42 +197,29 @@ const problem2: Solver = () => {
 
     for (const code of codes) {
         console.log(code);
-        let sequences = getKeyboardSequences(code.split(""), true);
+        // 1 numeric keypad
+        const sequences = getKeyboardSequences(code.split(""), true);
 
-        // let sequencesCount = sequences.length;
-        // let sequencesLength = sequences[0].length;
+        let sequencesPatternCount: PatternCount[] = sequences.map(getPatternCountFromSequence);
 
-        for (let i = 0; i < 2; i++) {
-            console.log("   => ", i + 1);
-            sequences = sequences.flatMap((sequence) => getKeyboardSequences(sequence));
-            // console.log(
-            //     "   => Growth:",
-            //     sequencesLength,
-            //     "*",
-            //     sequencesCount,
-            //     "to",
-            //     sequences.length,
-            //     "*",
-            //     sequences[0].length,
-            //     " => ",
-            //     sequences.length * sequences[0].length / (sequencesCount * sequencesLength),
-            // );
-            // sequencesLength = sequences[0].length;
-            // sequencesCount = sequences.length;
+        // 25 directional keypads
+        for (let i = 0; i < 25; i++) {
+            sequencesPatternCount = sequencesPatternCount.map((pc) => transformPatternCount(pc));
         }
 
-        const [minLength, maxLength] = sequences.reduce(
-            ([min, max], sequence) => [Math.min(min, sequence.length), Math.max(max, sequence.length)],
-            [sequences[0].length, sequences[0].length],
-        );
-
-        // console.log({
-        //     code,
-        //     minLength,
-        //     maxLength,
-        //     value: +code.substring(0, 3),
-        //     complexity: minLength * +code.substring(0, 3),
-        // });
+        const minLength = sequencesPatternCount
+            .map(
+                (pc) =>
+                    Object.entries(pc)
+                        .reduce(
+                            (sum, [pattern, count]) => sum + count * pattern.length,
+                            0,
+                        ),
+            )
+            .reduce(
+                (min, value) => min === -1 ? value : Math.min(min, value),
+                -1,
+            );
 
         complexity += minLength * +code.substring(0, 3);
     }
@@ -197,10 +231,11 @@ const problem2: Solver = () => {
 // Display answers
 // ---------------
 
-solveWithLogs(problem1, 1);
+// solveWithLogs(problem1, 1);
 // Tries:
 // - 176650 => Correct !
 
-// solveWithLogs(problem2, 2);
+solveWithLogs(problem2, 2);
 // Tries:
-// -
+// - 620703495136848 > Too high :/
+// - 247965001155352 > Too high...
